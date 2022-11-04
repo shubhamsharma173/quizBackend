@@ -49,6 +49,8 @@ app.get("/getLeaderboard", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log(`Server Started at ${3000}`);
+var port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server Started at ${port}`);
 });
