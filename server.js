@@ -28,6 +28,7 @@ app.post("/post", async (req, res) => {
       mobile: req.body.mobile,
       city: req.body.city,
       score: req.body.score,
+      timeTaken: req.body.timeTaken != undefined ? req.body.timeTaken : "",
     },
     { upsert: true },
     function (err, doc) {

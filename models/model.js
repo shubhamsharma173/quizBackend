@@ -17,6 +17,9 @@ const dataSchema = new mongoose.Schema({
     required: true,
     type: Number,
   },
+  timeTaken: {
+    type: String,
+  },
   time: { type: Date, default: Date.now },
 });
 
