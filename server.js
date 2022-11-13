@@ -28,7 +28,7 @@ app.post("/post", async (req, res) => {
       mobile: req.body.mobile,
       city: req.body.city,
       score: req.body.score,
-      timeTaken: req.body.timeTaken != undefined ? req.body.timeTaken : "",
+      timeTaken: req.body.timeTaken != undefined ? parseFloat(req.body.timeTaken) : 0.00,
     },
     { upsert: true },
     function (err, doc) {
