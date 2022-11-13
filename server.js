@@ -40,11 +40,13 @@ app.post("/post", async (req, res) => {
 
 app.get("/getLeaderboard", async (req, res) => {
   try {
-    Model.aggregate([{ $sort: { time: -1 } }, { $limit: 10 }]).exec(
-      function (err, data) {
-        res.json(data);
-      }
-    );
+    Model.aggregate([{ $sort: { score: -1 } }, { $limit: 10 }]).exec(function (
+      err,
+      data
+    ) {
+      data.sort((a, b) => parseFloat(a.timeTaken) - parseFloat(b.timeTaken));
+      res.json(data);
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
