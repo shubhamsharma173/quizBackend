@@ -28,7 +28,8 @@ app.post("/post", async (req, res) => {
       mobile: req.body.mobile,
       city: req.body.city,
       score: req.body.score,
-      timeTaken: req.body.timeTaken != undefined ? parseFloat(req.body.timeTaken) : 0.00,
+      timeTaken:
+        req.body.timeTaken != undefined ? parseFloat(req.body.timeTaken) : 0.0,
     },
     { upsert: true },
     function (err, doc) {
@@ -40,11 +41,10 @@ app.post("/post", async (req, res) => {
 
 app.get("/getLeaderboard", async (req, res) => {
   try {
-    Model.aggregate([{ $sort: { score: -1 } }, { $limit: 10 }]).exec(function (
-      err,
-      data
-    ) {
-      data.sort((a, b) => parseFloat(a.timeTaken) - parseFloat(b.timeTaken));
+    Model.aggregate([
+      { $sort: { score: -1, timeTaken: 1 } },
+      { $limit: 10 },
+    ]).exec(function (err, data) {
       res.json(data);
     });
   } catch (error) {
